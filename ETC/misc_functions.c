@@ -10,11 +10,13 @@ volatile unsigned long sys_time = 0;
 
 void port_config(){
 	//mark PORTE as Output
-	DDRE = 0xFF;
+	DDRC |= (1<<PC0) | (1<<PC2);							//Status LED as Output
+	DDRE |= (1<<PE0)|(1<<PE1)|(1<<PE2);						//ETC_out Servo CTRL etc as Output
+	DDRF &= ~(1<<PC0) & ~(1<<PC1) & ~(1<<PC2) & ~(1<<PC3);	//ADC Inputs
 }
 void sys_tick(){
 	// switch Status LED state
-	PORTD ^= 1<<PD0;
+	PORTC ^= 1<<PC2;
 }
 
 void sys_timer_config(){
@@ -28,7 +30,5 @@ void sys_timer_config(){
 }
 //ISR for Timer 0 compare interrupt
 ISR(TIMER0_COMP_vect){
-	
 	sys_time++; //system time generation
-
 }
