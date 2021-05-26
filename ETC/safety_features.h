@@ -11,6 +11,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#define TRUE 1
+#define FALSE 0
+
 // defines to enable/disable the Output Pin for the Shutdown Circuit
 #define ENABLE_SHUTDOWN		PORTE |= 1<<PE1;
 #define DISABLE_SHUTDOWN	PORTE &= ~(1<<PE1);
@@ -25,33 +28,33 @@
 // Times are for the maximum allowd Deviations between Sensors and other Fail States
 // These Times are defined as Follows
 // 1 = 10 ms
-#define TIMER_APPS_DEFAULT 10;
-#define TIMER_TPS_DEFAULT 10;
-#define TIMER_TPS_TO_APPS_DEFAULT 50;
-#define TIMER_TPS_HARD_FAIL_DEFAULT 100;
+#define TIMER_APPS_DEFAULT 50;
+#define TIMER_TPS_DEFAULT 50;
+#define TIMER_TPS_TO_APPS_DEFAULT 100;
+#define TIMER_TPS_HARD_FAIL_DEFAULT 50;
 
 // these are defines for the calibration of the used sensor 
 // where min value stands for the position where the logical 0% is
 // max value stands for the position where the logical 100% is
-#define APPS1_MIN_VALUE 110
-#define APPS1_MAX_VALUE 750
-#define APPS2_MIN_VALUE 120
-#define APPS2_MAX_VALUE 750
+#define APPS1_MIN_VALUE 1023
+#define APPS1_MAX_VALUE 197
+#define APPS2_MIN_VALUE 867
+#define APPS2_MAX_VALUE 189
 
-#define TPS1_START		530
-#define TPS1_END		210
-#define TPS2_START		500
-#define TPS2_END		820
+#define TPS1_START		570 //459
+#define TPS1_END		721	//306
+#define TPS2_START		459	//570
+#define TPS2_END		306	//721
 
 //ADC Values defined as the IDLE position for the Throttle
 #define THROTTLE_IDLE1	400
 #define THROTTLE_IDLE2	600
 
 //allowed Deviation between the sensors
-#define APPS_DEVIATION_ALLOWED 10.0
-#define TPS_DEVIATION_ALLOWED 10.0
-#define TPS_DEVIATION_IDLE_ALLOWED 5.0
-#define TPS_APPS_DEVIATION_ALLOWED 10.0
+#define APPS_DEVIATION_ALLOWED 25.0
+#define TPS_DEVIATION_ALLOWED 25.0
+#define TPS_DEVIATION_IDLE_ALLOWED 25.0
+#define TPS_APPS_DEVIATION_ALLOWED 25.0
 
 uint8_t check_apps();
 uint8_t check_tps();

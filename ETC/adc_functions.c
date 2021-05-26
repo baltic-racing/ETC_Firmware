@@ -7,11 +7,14 @@
 
 
 #include "adc_functions.h"
+#include "safety_features.h"
 
 // array to store the adc data in
 uint16_t adc_values[4];
 // index var to know which adc will come next
 uint8_t adc_next = 0;
+extern volatile uint8_t Blipper_Enable;
+extern volatile uint8_t Anti_Blipper_Enable;
 
 
 void adc_config(){
@@ -55,10 +58,26 @@ ISR(ADC_vect){
 
 // getter for each adc var
 uint16_t adc_get_1(){
-	return adc_values[0];
+	
+	if (Blipper_Enable){
+		return APPS1_MAX_VALUE;
+	}
+	else if (Anti_Blipper_Enable){
+		return APPS1_MIN_VALUE;
+	}else{
+		return adc_values[0];
+	}
 }
 uint16_t adc_get_2(){
-	return adc_values[1];
+	
+	if (Blipper_Enable){
+		return APPS2_MAX_VALUE;
+	}
+	else if (Anti_Blipper_Enable){
+		return APPS2_MIN_VALUE;
+	}else{
+		return adc_values[1];
+	}
 }
 uint16_t adc_get_3(){
 	return adc_values[2];

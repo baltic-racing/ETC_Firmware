@@ -12,18 +12,15 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define TRUE 1
-#define FALSE 0
-
 #define SERVO_MAXANGLE 130
 #define OFF_TICKS_DEFAULT 20000
 #define SERVO_ETC_PORT PORTE
 #define SERVO_ETC_PIN PE2
 
 //calibrate to 0% tps
-#define ETC_MIN_ANGLE 61.9 
+#define ETC_MIN_ANGLE 26
 //calibrate to 100%tps
-#define ETC_MAX_ANGLE 89.0 
+#define ETC_MAX_ANGLE 50 
 
 //function to calculate the servo angle
 double calculate_angle(double percentage);

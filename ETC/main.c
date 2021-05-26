@@ -19,6 +19,7 @@ volatile uint16_t etc_time = 2000;
 
 uint8_t sys_time_10 = 0;	//10ms Timer
 uint8_t sys_time_50 = 0;	//50ms Timer
+volatile uint16_t rpm = 0;
 unsigned long time_old = 0;
 extern unsigned long sys_time;
 
@@ -32,6 +33,9 @@ extern int8_t timer_apps;
 extern int8_t timer_tps;
 extern int8_t timer_tps_to_apps;
 extern int8_t timer_tps_hard_fail;
+volatile uint8_t Blipper_Enable; 
+volatile uint8_t Anti_Blipper_Enable; 
+
 
 int main(void){
 	//config various perepherie
@@ -54,6 +58,17 @@ int main(void){
 	//data register which gets send over CAN
 	uint8_t etc_data[8];
 	
+	struct CAN_MOB can_ECU0_mob;
+	can_ECU0_mob.mob_id = 0x600;
+	can_ECU0_mob.mob_idmask = 0xffff;
+	can_ECU0_mob.mob_number = 1;
+	uint8_t ECU0_databytes[8];
+	
+	struct CAN_MOB can_uFAR_mob;
+	can_uFAR_mob.mob_id = 0x200;
+	can_uFAR_mob.mob_idmask = 0xffff;
+	can_uFAR_mob.mob_number = 2;
+	uint8_t uFAR_databytes[8];
 	
 	uint16_t volatile adc_val = adc_get_1();
 	double volatile angle = calculate_angle(adc_val);
@@ -97,9 +112,13 @@ int main(void){
 			etc_data[6] = timer_tps_to_apps;
 			etc_data[7] = timer_tps_hard_fail;
 
-			//transmit desired CAN MOB
+			//transmit and recieve desired CAN MOB`s
 			can_tx(&etc_mob, etc_data);
-
+			can_rx(&can_ECU0_mob, ECU0_databytes);
+			can_rx(&can_uFAR_mob, uFAR_databytes);
+			rpm = ECU0_databytes[1]<<8 | ECU0_databytes[0];
+			Blipper_Enable = uFAR_databytes[5];
+			Anti_Blipper_Enable = uFAR_databytes[6];
 		}
 		if(sys_time_50 >= 5){
 			sys_tick();				//blink status LED
