@@ -36,15 +36,18 @@
 // these are defines for the calibration of the used sensor 
 // where min value stands for the position where the logical 0% is
 // max value stands for the position where the logical 100% is
-#define APPS1_MIN_VALUE 1023
-#define APPS1_MAX_VALUE 166
-#define APPS2_MIN_VALUE 867
-#define APPS2_MAX_VALUE 159
+#define APPS1_MIN_VALUE 977
+#define APPS1_MAX_VALUE 148
+#define APPS2_MIN_VALUE 831
+#define APPS2_MAX_VALUE 99
 
-#define TPS1_START		572 //459
-#define TPS1_END		726	//306
-#define TPS2_START		456	//570
-#define TPS2_END		303	//721
+#define TPS1_START		646
+#define TPS1_END		933
+#define TPS2_START		374
+#define TPS2_END		98
+
+#define ANTI_BLIPPER_PERCENTAGE 50
+#define BLIPPER_PERCENTAGE 40
 
 //ADC Values defined as the IDLE position for the Throttle
 #define THROTTLE_IDLE1	400

@@ -36,6 +36,11 @@ extern int8_t timer_tps_hard_fail;
 volatile uint8_t Blipper_Enable; 
 volatile uint8_t Anti_Blipper_Enable; 
 
+float apps1_percentage_ext;
+float apps2_percentage_ext;
+float tps1_percentage_ext;
+float tps2_percentage_ext;
+
 
 int main(void){
 	//config various perepherie
@@ -103,10 +108,37 @@ int main(void){
 			sys_time_10 = 0;		//reset 10ms timer
 
 			//put desired Data into the CAN MOB
-			etc_data[0] = apps1_percentage;
-			etc_data[1] = apps2_percentage;
-			etc_data[2] = tps1_percentage;
-			etc_data[3] = tps2_percentage;
+			
+			if (apps1_percentage<=0)
+			{
+				apps1_percentage_ext=0;
+			}else
+				apps1_percentage_ext=apps1_percentage;
+				
+			if (apps2_percentage<=0)
+			{
+				apps2_percentage_ext=0;
+			}else{
+				apps2_percentage_ext=apps2_percentage;
+			}
+			
+			if (tps1_percentage<=0)
+			{
+				tps1_percentage_ext=0;
+			}else{
+				tps1_percentage_ext=tps1_percentage;
+			}
+			
+			if (tps2_percentage<=0)
+			{
+				tps2_percentage_ext=0;
+			}else{
+				tps2_percentage_ext=tps2_percentage;
+			}
+			etc_data[0] = apps1_percentage_ext;
+			etc_data[1] = apps2_percentage_ext;
+			etc_data[2] = tps1_percentage_ext;
+			etc_data[3] = tps2_percentage_ext;
 			etc_data[4] = timer_apps;
 			etc_data[5] = timer_tps;
 			etc_data[6] = timer_tps_to_apps;
