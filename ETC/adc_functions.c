@@ -60,10 +60,21 @@ ISR(ADC_vect){
 uint16_t adc_get_1(){
 	
 	if (Blipper_Enable){
-		return APPS1_MAX_VALUE;
+		double Blip_ADC = (double)(((double)BLIPPER_PERCENTAGE*((double)APPS1_MAX_VALUE-(double)APPS1_MIN_VALUE))/100)+APPS1_MIN_VALUE;
+		if (Blip_ADC <= adc_values[0]){
+			return Blip_ADC;
+		}else{
+			return adc_values[0];
+		}	
 	}
 	else if (Anti_Blipper_Enable){
-		return APPS1_MIN_VALUE;
+		
+		double Anti_Blip_ADC = (double)(((double)ANTI_BLIPPER_PERCENTAGE*((double)APPS1_MAX_VALUE-(double)APPS1_MIN_VALUE))/100)+APPS1_MIN_VALUE;
+		if (Anti_Blip_ADC >= adc_values[0]){
+			return Anti_Blip_ADC;
+		}else{
+			return adc_values[0];
+		}
 	}else{
 		return adc_values[0];
 	}
@@ -71,10 +82,21 @@ uint16_t adc_get_1(){
 uint16_t adc_get_2(){
 	
 	if (Blipper_Enable){
-		return APPS2_MAX_VALUE;
+		double Blip_ADC = (double)(((double)BLIPPER_PERCENTAGE*((double)APPS2_MAX_VALUE-(double)APPS2_MIN_VALUE))/100)+APPS2_MIN_VALUE;
+		if (Blip_ADC <= adc_values[0]){
+			return Blip_ADC;
+			}else{
+			return adc_values[0];
+		}
 	}
 	else if (Anti_Blipper_Enable){
-		return APPS2_MIN_VALUE;
+		
+		double Anti_Blip_ADC = (double)(((double)ANTI_BLIPPER_PERCENTAGE*((double)APPS2_MAX_VALUE-(double)APPS2_MIN_VALUE))/100)+APPS2_MIN_VALUE;
+		if (Anti_Blip_ADC >= adc_values[1]){
+			return Anti_Blip_ADC;
+			}else{
+			return adc_values[1];
+		}
 	}else{
 		return adc_values[1];
 	}

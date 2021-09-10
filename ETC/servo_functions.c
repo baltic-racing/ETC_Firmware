@@ -38,7 +38,7 @@ uint16_t calculate_servo_ticks(double deg){
 	if(deg > ETC_MAX_ANGLE){
 		deg = ETC_MAX_ANGLE;
 	}
-	return (uint16_t) 4200-2400 + (deg * (2400 / SERVO_MAXANGLE)); //Hopefully invertes the PWM signal from the ty19 to the ty 20 as the servo is mounted reversly
+	return (uint16_t) 4200 - (deg * (2400 / SERVO_MAXANGLE)); //Hopefully invertes the PWM signal from the ty19 to the ty 20 as the servo is mounted reversly
 	//original is return (uint16_t) 4200 - (deg * (2400 / SERVO_MAXANGLE));
 	//4200 = 2.1 ms => Servo PWM Signal
 	//2400 = 1,2 ms => differenz von 0,9 bis 2,1 ms

@@ -38,13 +38,13 @@ uint8_t check_apps(){
 
 	if (adc_values[0] == adc_values[1]){
 		//Signal lanes shorted together
-		//return 1;
+		return 1;
 	}
-	if(adc_values[0] <= 30 || adc_values[1] <= 30 ){
+	if(adc_values[0] <= 2 || adc_values[1] <= 2 ){
 		//if APPS shorted to ground or open circuit
 		return 0;
 	}
-	if (adc_values[0] >= 1024 || adc_values[1] >= 1024){
+	if (adc_values[0] >= 1023 || adc_values[1] >= 1023){
 		//if APPS shorted to vss
 		return 0;
 	}
@@ -60,12 +60,12 @@ uint8_t check_apps(){
 }
 uint8_t check_tps(){
 	if(adc_values[2] == adc_values[3]){
-		//return 0; // shorted signal lanes
+		return 0; // shorted signal lanes
 	}
-	if (adc_values[2] == 0 || adc_values[3] == 0){ //short circuit to GND
+	if (adc_values[2] <= 1 || adc_values[3] <= 1){ //short circuit to GND
 		return 0;
 	}
-	if (adc_values[2] >= 1010 || adc_values[3] >= 1010){ //short circuit to vcc
+	if (adc_values[2] >= 1023 || adc_values[3] >= 1023){ //short circuit to vcc
 		return 0;
 	}
 	if(tps1_percentage > tps2_percentage + TPS_DEVIATION_ALLOWED){ //deviation +5%
@@ -189,6 +189,7 @@ void check_for_errors(){
 	
 		case 0:
 			DISABLE_POWER
+			DISABLE_SHUTDOWN
 			timer_apps = 0;
 			break;
 		case 1:
