@@ -19,6 +19,8 @@ float apps2_percentage;
 float tps1_percentage;
 float tps2_percentage;
 
+extern volatile rpm;
+
 int8_t timer_apps = TIMER_APPS_DEFAULT;
 int8_t timer_tps = TIMER_TPS_DEFAULT;
 int8_t timer_tps_to_apps = TIMER_TPS_TO_APPS_DEFAULT;
@@ -36,13 +38,13 @@ uint8_t check_apps(){
 
 	if (adc_values[0] == adc_values[1]){
 		//Signal lanes shorted together
-		//return 1;
+		return 1;
 	}
-	if(adc_values[0] <= 30 || adc_values[1] <= 30 ){
+	if(adc_values[0] <= 2 || adc_values[1] <= 2 ){
 		//if APPS shorted to ground or open circuit
 		return 0;
 	}
-	if (adc_values[0] >= 1000 || adc_values[1] >= 1000){
+	if (adc_values[0] >= 1023 || adc_values[1] >= 1023){
 		//if APPS shorted to vss
 		return 0;
 	}
@@ -58,12 +60,12 @@ uint8_t check_apps(){
 }
 uint8_t check_tps(){
 	if(adc_values[2] == adc_values[3]){
-		//return 0; // shorted signal lanes
+		return 0; // shorted signal lanes
 	}
-	if (adc_values[2] == 0 || adc_values[3] == 0){ //short circuit to GND
+	if (adc_values[2] <= 1 || adc_values[3] <= 1){ //short circuit to GND
 		return 0;
 	}
-	if (adc_values[2] >= 1010 || adc_values[3] >= 1010){ //short circuit to vcc
+	if (adc_values[2] >= 1023 || adc_values[3] >= 1023){ //short circuit to vcc
 		return 0;
 	}
 	if(tps1_percentage > tps2_percentage + TPS_DEVIATION_ALLOWED){ //deviation +5%
@@ -76,7 +78,7 @@ uint8_t check_tps(){
 }
 uint8_t apps_to_tps(){
 	
-	if (tps1_percentage < -13){
+	if (tps1_percentage < -25){
 		return 0;
 	}
 	if(apps1_percentage > tps1_percentage+TPS_APPS_DEVIATION_ALLOWED){
@@ -187,6 +189,7 @@ void check_for_errors(){
 	
 		case 0:
 			DISABLE_POWER
+			DISABLE_SHUTDOWN
 			timer_apps = 0;
 			break;
 		case 1:
@@ -227,8 +230,10 @@ void check_for_errors(){
 		}
 	}
 	if(timer_tps_to_apps > 0 && timer_tps > 0 && timer_apps > 0 && timer_tps_hard_fail > 0 && tps_idle_was_ok > 0){
-		ENABLE_POWER
-		//ENABLE_SHUTDOWN
+		ENABLE_SHUTDOWN //Enable Shutdown Circuit if ETC System is OK
+		ENABLE_POWER //Enable Power to the Servo 
+	
+		
 		apps_is_valid = 1;
 	} else {
 	

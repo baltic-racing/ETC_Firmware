@@ -7,11 +7,14 @@
 
 
 #include "adc_functions.h"
+#include "safety_features.h"
 
 // array to store the adc data in
 uint16_t adc_values[4];
 // index var to know which adc will come next
 uint8_t adc_next = 0;
+extern volatile uint8_t Blipper_Enable;
+extern volatile uint8_t Anti_Blipper_Enable;
 
 
 void adc_config(){
@@ -55,10 +58,48 @@ ISR(ADC_vect){
 
 // getter for each adc var
 uint16_t adc_get_1(){
-	return adc_values[0];
+	
+	if (Blipper_Enable){
+		double Blip_ADC = (double)(((double)BLIPPER_PERCENTAGE*((double)APPS1_MAX_VALUE-(double)APPS1_MIN_VALUE))/100)+APPS1_MIN_VALUE;
+		if (Blip_ADC <= adc_values[0]){
+			return Blip_ADC;
+		}else{
+			return adc_values[0];
+		}	
+	}
+	else if (Anti_Blipper_Enable){
+		
+		double Anti_Blip_ADC = (double)(((double)ANTI_BLIPPER_PERCENTAGE*((double)APPS1_MAX_VALUE-(double)APPS1_MIN_VALUE))/100)+APPS1_MIN_VALUE;
+		if (Anti_Blip_ADC >= adc_values[0]){
+			return Anti_Blip_ADC;
+		}else{
+			return adc_values[0];
+		}
+	}else{
+		return adc_values[0];
+	}
 }
 uint16_t adc_get_2(){
-	return adc_values[1];
+	
+	if (Blipper_Enable){
+		double Blip_ADC = (double)(((double)BLIPPER_PERCENTAGE*((double)APPS2_MAX_VALUE-(double)APPS2_MIN_VALUE))/100)+APPS2_MIN_VALUE;
+		if (Blip_ADC <= adc_values[0]){
+			return Blip_ADC;
+			}else{
+			return adc_values[0];
+		}
+	}
+	else if (Anti_Blipper_Enable){
+		
+		double Anti_Blip_ADC = (double)(((double)ANTI_BLIPPER_PERCENTAGE*((double)APPS2_MAX_VALUE-(double)APPS2_MIN_VALUE))/100)+APPS2_MIN_VALUE;
+		if (Anti_Blip_ADC >= adc_values[1]){
+			return Anti_Blip_ADC;
+			}else{
+			return adc_values[1];
+		}
+	}else{
+		return adc_values[1];
+	}
 }
 uint16_t adc_get_3(){
 	return adc_values[2];
