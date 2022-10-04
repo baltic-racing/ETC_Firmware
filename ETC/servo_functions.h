@@ -12,7 +12,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define SERVO_MAXANGLE 130
+#define SERVO_MAXANGLE 110
 #define OFF_TICKS_DEFAULT 20000
 #define SERVO_ETC_PORT PORTE
 #define SERVO_ETC_PIN PE2

@@ -48,6 +48,7 @@ uint8_t check_apps(){
 		//if APPS shorted to vss
 		return 0;
 	}
+	
 	if (apps1_percentage > apps2_percentage+APPS_DEVIATION_ALLOWED){
 		return 1; //deviation between apps +10%
 	}
@@ -58,26 +59,32 @@ uint8_t check_apps(){
 	return 2;
 	
 }
+
 uint8_t check_tps(){
+/*
 	if(adc_values[2] == adc_values[3]){
 		return 0; // shorted signal lanes
 	}
+	*/
 	if (adc_values[2] <= 1 || adc_values[3] <= 1){ //short circuit to GND
 		return 0;
 	}
 	if (adc_values[2] >= 1023 || adc_values[3] >= 1023){ //short circuit to vcc
 		return 0;
 	}
+	
 	if(tps1_percentage > tps2_percentage + TPS_DEVIATION_ALLOWED){ //deviation +5%
 		return 1;
 	}
 	if(tps1_percentage < tps2_percentage - TPS_DEVIATION_ALLOWED){ //deviation -5%
 		return 1;
 	}
+	
 	return 2;
 }
+
 uint8_t apps_to_tps(){
-	
+
 	if (tps1_percentage < -25){
 		return 0;
 	}
@@ -95,9 +102,9 @@ uint8_t apps_to_tps(){
 	}
 	
 	return 1;
-	
-	
+		
 }
+
 void update_apps_percantage(){
 
 	apps1_percentage = (100.0/((float)APPS1_MAX_VALUE-APPS1_MIN_VALUE)) * ((float)adc_get_1()-APPS1_MIN_VALUE);
