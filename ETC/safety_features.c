@@ -245,17 +245,17 @@ void check_for_errors(){
 	} else {
 	
 		if(timer_tps_to_apps <= 0) {
-			DISABLE_POWER
+			//DISABLE_POWER
 		}
 		if(timer_apps <= 0){
-			DISABLE_POWER
-			apps_is_valid = 0;
+			//DISABLE_POWER
+			//apps_is_valid = 0;
 		}
 		if(timer_tps <= 0){
-			DISABLE_POWER
+			//DISABLE_POWER
 		}
 		if(timer_tps_hard_fail <= 0){
-			DISABLE_SHUTDOWN
+			//DISABLE_SHUTDOWN
 		}
 	}
 }
