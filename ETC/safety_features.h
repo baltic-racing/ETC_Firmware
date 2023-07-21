@@ -36,15 +36,15 @@
 // these are defines for the calibration of the used sensor 
 // where min value stands for the position where the logical 0% is
 // max value stands for the position where the logical 100% is
-#define APPS1_MIN_VALUE 966
-#define APPS1_MAX_VALUE 187
-#define APPS2_MIN_VALUE 787
-#define APPS2_MAX_VALUE 125
+#define APPS1_MIN_VALUE 983
+#define APPS1_MAX_VALUE 215
+#define APPS2_MIN_VALUE 815
+#define APPS2_MAX_VALUE 159
 
-#define TPS1_START		621
-#define TPS1_END		941
-#define TPS2_START		401
-#define TPS2_END		98
+#define TPS1_START		651
+#define TPS1_END		942
+#define TPS2_START		379
+#define TPS2_END		97
 
 #define ANTI_BLIPPER_PERCENTAGE 50
 #define BLIPPER_PERCENTAGE 40

@@ -18,7 +18,7 @@
 #define SERVO_ETC_PIN PE2
 
 //calibrate to 0% tps
-#define ETC_MIN_ANGLE 25
+#define ETC_MIN_ANGLE 26
 //calibrate to 100%tps
 #define ETC_MAX_ANGLE 50 
 
