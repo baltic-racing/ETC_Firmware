@@ -319,9 +319,9 @@ uint16_t adc_get_1(){
      1c8:	88 23       	and	r24, r24
      1ca:	69 f1       	breq	.+90     	; 0x226 <adc_get_1+0x76>
 		double Blip_ADC = (double)(((double)BLIPPER_PERCENTAGE*((double)APPS1_MAX_VALUE-(double)APPS1_MIN_VALUE))/100)+APPS1_MIN_VALUE;
-     1cc:	83 e3       	ldi	r24, 0x33	; 51
-     1ce:	93 ef       	ldi	r25, 0xF3	; 243
-     1d0:	a8 e2       	ldi	r26, 0x28	; 40
+     1cc:	86 e6       	ldi	r24, 0x66	; 102
+     1ce:	96 ee       	ldi	r25, 0xE6	; 230
+     1d0:	a6 e2       	ldi	r26, 0x26	; 38
      1d2:	b4 e4       	ldi	r27, 0x44	; 68
      1d4:	89 83       	std	Y+1, r24	; 0x01
      1d6:	9a 83       	std	Y+2, r25	; 0x02
@@ -370,8 +370,8 @@ uint16_t adc_get_1(){
 		
 		double Anti_Blip_ADC = (double)(((double)ANTI_BLIPPER_PERCENTAGE*((double)APPS1_MAX_VALUE-(double)APPS1_MIN_VALUE))/100)+APPS1_MIN_VALUE;
      22e:	80 e0       	ldi	r24, 0x00	; 0
-     230:	90 ec       	ldi	r25, 0xC0	; 192
-     232:	a5 e1       	ldi	r26, 0x15	; 21
+     230:	90 ee       	ldi	r25, 0xE0	; 224
+     232:	a3 e1       	ldi	r26, 0x13	; 19
      234:	b4 e4       	ldi	r27, 0x44	; 68
      236:	8d 83       	std	Y+5, r24	; 0x05
      238:	9e 83       	std	Y+6, r25	; 0x06
@@ -446,8 +446,8 @@ uint16_t adc_get_2(){
      2ba:	88 23       	and	r24, r24
      2bc:	69 f1       	breq	.+90     	; 0x318 <adc_get_2+0x76>
 		double Blip_ADC = (double)(((double)BLIPPER_PERCENTAGE*((double)APPS2_MAX_VALUE-(double)APPS2_MIN_VALUE))/100)+APPS2_MIN_VALUE;
-     2be:	86 e6       	ldi	r24, 0x66	; 102
-     2c0:	96 e2       	ldi	r25, 0x26	; 38
+     2be:	83 e3       	ldi	r24, 0x33	; 51
+     2c0:	93 eb       	ldi	r25, 0xB3	; 179
      2c2:	aa e0       	ldi	r26, 0x0A	; 10
      2c4:	b4 e4       	ldi	r27, 0x44	; 68
      2c6:	89 83       	std	Y+1, r24	; 0x01
@@ -498,7 +498,7 @@ uint16_t adc_get_2(){
 		double Anti_Blip_ADC = (double)(((double)ANTI_BLIPPER_PERCENTAGE*((double)APPS2_MAX_VALUE-(double)APPS2_MIN_VALUE))/100)+APPS2_MIN_VALUE;
      320:	80 e0       	ldi	r24, 0x00	; 0
      322:	90 e8       	ldi	r25, 0x80	; 128
-     324:	a3 ef       	ldi	r26, 0xF3	; 243
+     324:	a4 ef       	ldi	r26, 0xF4	; 244
      326:	b3 e4       	ldi	r27, 0x43	; 67
      328:	8d 83       	std	Y+5, r24	; 0x05
      32a:	9e 83       	std	Y+6, r25	; 0x06
@@ -2277,17 +2277,17 @@ void update_apps_percantage(){
      fbe:	dc 01       	movw	r26, r24
      fc0:	cb 01       	movw	r24, r22
      fc2:	20 e0       	ldi	r18, 0x00	; 0
-     fc4:	30 ec       	ldi	r19, 0xC0	; 192
-     fc6:	45 e7       	ldi	r20, 0x75	; 117
+     fc4:	30 e0       	ldi	r19, 0x00	; 0
+     fc6:	43 e7       	ldi	r20, 0x73	; 115
      fc8:	54 e4       	ldi	r21, 0x44	; 68
      fca:	bc 01       	movw	r22, r24
      fcc:	cd 01       	movw	r24, r26
      fce:	e1 d3       	rcall	.+1986   	; 0x1792 <__subsf3>
      fd0:	dc 01       	movw	r26, r24
      fd2:	cb 01       	movw	r24, r22
-     fd4:	25 e5       	ldi	r18, 0x55	; 85
-     fd6:	35 e5       	ldi	r19, 0x55	; 85
-     fd8:	45 e0       	ldi	r20, 0x05	; 5
+     fd4:	2e e4       	ldi	r18, 0x4E	; 78
+     fd6:	3f e8       	ldi	r19, 0x8F	; 143
+     fd8:	46 e0       	ldi	r20, 0x06	; 6
      fda:	5e eb       	ldi	r21, 0xBE	; 190
      fdc:	bc 01       	movw	r22, r24
      fde:	cd 01       	movw	r24, r26
@@ -2309,17 +2309,17 @@ void update_apps_percantage(){
     1004:	dc 01       	movw	r26, r24
     1006:	cb 01       	movw	r24, r22
     1008:	20 e0       	ldi	r18, 0x00	; 0
-    100a:	30 ec       	ldi	r19, 0xC0	; 192
-    100c:	4b e4       	ldi	r20, 0x4B	; 75
+    100a:	30 e8       	ldi	r19, 0x80	; 128
+    100c:	4c e4       	ldi	r20, 0x4C	; 76
     100e:	54 e4       	ldi	r21, 0x44	; 68
     1010:	bc 01       	movw	r22, r24
     1012:	cd 01       	movw	r24, r26
     1014:	be d3       	rcall	.+1916   	; 0x1792 <__subsf3>
     1016:	dc 01       	movw	r26, r24
     1018:	cb 01       	movw	r24, r22
-    101a:	2a ef       	ldi	r18, 0xFA	; 250
-    101c:	38 e1       	ldi	r19, 0x18	; 24
-    101e:	4c e1       	ldi	r20, 0x1C	; 28
+    101a:	24 e8       	ldi	r18, 0x84	; 132
+    101c:	3f e9       	ldi	r19, 0x9F	; 159
+    101e:	4b e1       	ldi	r20, 0x1B	; 27
     1020:	5e eb       	ldi	r21, 0xBE	; 190
     1022:	bc 01       	movw	r22, r24
     1024:	cd 01       	movw	r24, r26
@@ -2412,16 +2412,16 @@ void update_tps_percentage(){
     10d2:	cb 01       	movw	r24, r22
     10d4:	20 e0       	ldi	r18, 0x00	; 0
     10d6:	30 ec       	ldi	r19, 0xC0	; 192
-    10d8:	42 e2       	ldi	r20, 0x22	; 34
+    10d8:	40 e2       	ldi	r20, 0x20	; 32
     10da:	54 e4       	ldi	r21, 0x44	; 68
     10dc:	bc 01       	movw	r22, r24
     10de:	cd 01       	movw	r24, r26
     10e0:	58 d3       	rcall	.+1712   	; 0x1792 <__subsf3>
     10e2:	dc 01       	movw	r26, r24
     10e4:	cb 01       	movw	r24, r22
-    10e6:	2d ee       	ldi	r18, 0xED	; 237
-    10e8:	31 ef       	ldi	r19, 0xF1	; 241
-    10ea:	4f ea       	ldi	r20, 0xAF	; 175
+    10e6:	25 ee       	ldi	r18, 0xE5	; 229
+    10e8:	3f ec       	ldi	r19, 0xCF	; 207
+    10ea:	4b ea       	ldi	r20, 0xAB	; 171
     10ec:	5e e3       	ldi	r21, 0x3E	; 62
     10ee:	bc 01       	movw	r22, r24
     10f0:	cd 01       	movw	r24, r26
@@ -2468,16 +2468,16 @@ void update_tps_percentage(){
     1152:	cb 01       	movw	r24, r22
     1154:	20 e0       	ldi	r18, 0x00	; 0
     1156:	30 e8       	ldi	r19, 0x80	; 128
-    1158:	4d eb       	ldi	r20, 0xBD	; 189
+    1158:	4f eb       	ldi	r20, 0xBF	; 191
     115a:	53 e4       	ldi	r21, 0x43	; 67
     115c:	bc 01       	movw	r22, r24
     115e:	cd 01       	movw	r24, r26
     1160:	18 d3       	rcall	.+1584   	; 0x1792 <__subsf3>
     1162:	dc 01       	movw	r26, r24
     1164:	cb 01       	movw	r24, r22
-    1166:	2f e6       	ldi	r18, 0x6F	; 111
-    1168:	3f e8       	ldi	r19, 0x8F	; 143
-    116a:	45 eb       	ldi	r20, 0xB5	; 181
+    1166:	2d e1       	ldi	r18, 0x1D	; 29
+    1168:	38 e4       	ldi	r19, 0x48	; 72
+    116a:	44 eb       	ldi	r20, 0xB4	; 180
     116c:	5e eb       	ldi	r21, 0xBE	; 190
     116e:	bc 01       	movw	r22, r24
     1170:	cd 01       	movw	r24, r26
